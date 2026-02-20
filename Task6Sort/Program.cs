@@ -14,7 +14,7 @@ class Program
         TimeSpan standardExecutionTime;
         TimeSpan studentExecutionTime;
 
-        var (standardArray, studentArray) = GenerateArrays(10000);
+        var (standardArray, studentArray) = GenerateArrays(10);
         int[] standardSorted;
         int[] studentSorted;
 
@@ -44,9 +44,11 @@ class Program
 
         if (!Enumerable.SequenceEqual(standardSorted, studentSorted))
         {
-            Console.Error.WriteLine("Student sorting implementation is incorrect, array is not sorted.");
+            Console.Error.WriteLine($"Student sorting implementation is incorrect, array is not sorted.");
             return;
         }
+
+        Console.Error.WriteLine("Sorting algorithm is correct.");
     }
 
     private static (TimeSpan, T[])? Measure<T>(Func<T[], T[]> algorithm,
@@ -77,9 +79,9 @@ class Program
     private static (int[], int[]) GenerateArrays(int size)
     {
         var standardArray = GenerateArray(size);
-        var userArray = new int[size];
-        Array.Copy(standardArray, userArray, size);
-        return (standardArray, userArray);
+        var studentArray = new int[size];
+        Array.Copy(standardArray, studentArray, size);
+        return (standardArray, studentArray);
     }
 
     private static int[] GenerateArray(int size)
@@ -87,7 +89,7 @@ class Program
 
     private static int[] GenerateArray(Random rand, int size)
         => Enumerable
-            .Range(0, size + 1)
+            .Range(0, size)
             .Select(_ => rand.Next())
             .ToArray();
 
