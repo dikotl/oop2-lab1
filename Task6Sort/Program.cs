@@ -22,7 +22,7 @@ class Program
         {
             using var source = new CancellationTokenSource();
             source.CancelAfter(timeout);
-            var result = Measure(standard, standardArray, source.Token, "Standard");
+            var result = Measure(standard, standardArray, "Standard", source.Token);
             if (result is null) return;
             (standardExecutionTime, standardSorted) = result.Value;
         }
@@ -37,7 +37,7 @@ class Program
         {
             using var source = new CancellationTokenSource();
             source.CancelAfter(timeout * 3 + TimeSpan.FromSeconds(1));
-            var result = Measure(student, studentArray, source.Token, "Student");
+            var result = Measure(student, studentArray, "Student", source.Token);
             if (result is null) return;
             (studentExecutionTime, studentSorted) = result.Value;
         }
@@ -53,8 +53,8 @@ class Program
 
     private static (TimeSpan, T[])? Measure<T>(Func<T[], T[]> algorithm,
                                                T[] input,
-                                               CancellationToken token,
-                                               string taskName)
+                                               string taskName,
+                                               CancellationToken token)
     {
         try
         {
