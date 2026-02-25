@@ -21,7 +21,7 @@ class Timer
 
 class Program
 {
-    static async Task Main()
+    static void Main()
     {
         int n = 0;
         _ = new Timer(TimeSpan.FromMilliseconds(100), () => { Console.WriteLine(++n); });
