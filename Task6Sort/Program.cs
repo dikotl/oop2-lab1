@@ -4,12 +4,15 @@ class Program
 {
     public static void Main()
     {
+        Console.WriteLine("Testing ShaderSort...");
         Test(TimeSpan.FromSeconds(3), ShakerSort.Standard, ShakerSort.Student);
+        Console.WriteLine("Testing MergeSort...");
+        Test(TimeSpan.FromSeconds(3), MergeSort.Standard, MergeSort.Student);
     }
 
     private static void Test(TimeSpan timeout,
-                                Func<int[], int[]> standard,
-                                Func<int[], int[]> student)
+                             Func<int[], int[]> standard,
+                             Func<int[], int[]> student)
     {
         TimeSpan standardExecutionTime;
         TimeSpan studentExecutionTime;
